@@ -1,0 +1,54 @@
+apply plugin: "java"
+apply plugin: "idea"
+
+ext {
+    repos = [
+            mymavenrepo: "https://mymavenrepo.com/repo/SbfutqGx3LM3VdY6CLKu/",
+            jongo      : "http://repository-jongo.forge.cloudbees.com/release"
+    ]
+
+    libraries = [
+            log   : [
+                    utils     : [
+                            "org.slf4j:jcl-over-slf4j:1.7.12",
+                            'org.slf4j:jul-to-slf4j:1.7.12'
+                    ],
+                    logback   : [
+                            "ch.qos.logback:logback-classic:1.1.3",
+                            "org.codehaus.janino:janino:2.7.8"
+                    ],
+                    logentries: "com.logentries:logentries-appender:1.1.30"
+            ],
+            utils: [
+                    guava  : "com.google.guava:guava:18.0",
+                    soyuz  : "io.belov:soyuz-utils:1.17",
+                    lombok : "org.projectlombok:lombok:1.16.2",
+                    ua     : "net.sf.uadetector:uadetector-resources:2014.10",
+                    commons: [
+                            io         : "commons-io:commons-io:2.4",
+                            lang       : "commons-lang:commons-lang:2.6",
+                            collections: "org.apache.commons:commons-collections4:4.0"
+                    ]
+            ],
+            test : [
+                    junit: "junit:junit:4.12"
+            ]
+
+    ]
+}
+
+repositories {
+    mavenCentral()
+    maven { url repos.mymavenrepo }
+}
+
+dependencies {
+    compile libraries.log.logback
+    compile libraries.utils.soyuz
+    compile libraries.utils.commons.lang
+    compile libraries.utils.commons.io
+    compile libraries.utils.guava
+    compile libraries.utils.lombok
+
+    testCompile libraries.test.junit
+}
